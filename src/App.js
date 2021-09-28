@@ -1,5 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+
+const data = fetch("https://api.cyanite.ai/graphql", {
+  method: "POST",
+  body: JSON.stringify({
+    query: {
+      query: /* GraphQL */ `
+        query LibraryTracksQuery {
+          libraryTracks(first: 10) {
+            edges {
+              node {
+                id
+              }
+            }
+          }
+        }
+      `,
+      variables: {
+        first: 10,
+      },
+    },
+  }),
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: "Bearer" + "aae8a178286e55dd1626553bb38135ea14404",
+  },
+});
+
+console.log(data);
 
 function App() {
   return (
