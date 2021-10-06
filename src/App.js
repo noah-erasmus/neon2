@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const accessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSW50ZWdyYXRpb25BY2Nlc3NUb2tlbiIsInZlcnNpb24iOiIxLjAiLCJpbnRlZ3JhdGlvbklkIjoxODEsInVzZXJJZCI6NDQwMCwiYWNjZXNzVG9rZW5TZWNyZXQiOiJmNzJkNGUzMTY5YjE4MjMwZmQxMmI5ZTQ4MjVjYmU5ZjRlMmVmMjkzMzhhZmFkYTUxOGEwYTY1NGM2ZjVkODllIiwiaWF0IjoxNjMyODM3MzY3fQ.wKBR9bEeQpJ8r-Lvh_RscYXKbamALc5ViluHcQg3-4c";
@@ -69,11 +70,47 @@ function App() {
   }, []);
 
   return (
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
+            <li>
+              <Link to="/analytics">Analytics</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route path="/home">
+            <Home resp={resp} />
+          </Route>
+          <Route path="/analytics">
+            <Analytics />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+    // <div className="App">
+    //   <h1>test</h1>
+    //   <h2>{resp.data.libraryTracks.edges[0].node.id}</h2>
+    // </div>
+  );
+}
+
+function Home(props) {
+  return (
     <div className="App">
       <h1>test</h1>
-      <h2>{resp.data.libraryTracks.edges[0].node.id}</h2>
+      <h2>{props.resp.data.libraryTracks.edges[0].node.id}</h2>
     </div>
   );
+}
+
+function Analytics() {
+  return <h1>Analytics</h1>;
 }
 
 export default App;
