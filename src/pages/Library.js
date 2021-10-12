@@ -1,27 +1,13 @@
+import Button from "@restart/ui/esm/Button";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import cover from "../images/mgkCover.jpg";
 
 function Library() {
   const accessToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSW50ZWdyYXRpb25BY2Nlc3NUb2tlbiIsInZlcnNpb24iOiIxLjAiLCJpbnRlZ3JhdGlvbklkIjoxODEsInVzZXJJZCI6NDQwMCwiYWNjZXNzVG9rZW5TZWNyZXQiOiJmNzJkNGUzMTY5YjE4MjMwZmQxMmI5ZTQ4MjVjYmU5ZjRlMmVmMjkzMzhhZmFkYTUxOGEwYTY1NGM2ZjVkODllIiwiaWF0IjoxNjMyODM3MzY3fQ.wKBR9bEeQpJ8r-Lvh_RscYXKbamALc5ViluHcQg3-4c";
   const [songs, setSongs] = useState([]);
-  const [edges, setEdges] = useState([
-    {
-      cursor: "NTM4MjIyNg==",
-      node: {
-        id: "5382226",
-        title: "Rolling-In-The-Deep_Adele_21.mp3",
-        audioAnalysisV6: {
-          __typename: "AudioAnalysisV6Finished",
-          result: {
-            predominantVoiceGender: "female",
-            musicalEraTag: "early / mid 1970s",
-          },
-        },
-      },
-    },
-  ]);
   const [resp, setResp] = useState({
     data: {
       libraryTracks: {
@@ -93,10 +79,12 @@ function Library() {
         const title = i.node.title.split("_")[0].replace(/-/g, " ");
         const artist = i.node.title.split("_")[1].replace(/-/g, " ");
         const album = i.node.title.split("_")[0].replace(/-/g, " ");
+        const id = i.node.id;
         return {
           title: title,
           artist: artist,
           album: album,
+          id: id,
         };
       })
     );
@@ -140,6 +128,7 @@ function Library() {
                 />
               </Col>
               <Col
+                xs={7}
                 style={{
                   padding: 0,
                   display: "flex",
@@ -149,6 +138,11 @@ function Library() {
                   <h3>{item.title}</h3>
                   <h4>{item.artist}</h4>
                 </div>
+              </Col>
+              <Col xs={1}>
+                <LinkContainer to={`/detail/:${item.id}`}>
+                  <Button variant="danger">More</Button>
+                </LinkContainer>
               </Col>
             </Row>
           );
