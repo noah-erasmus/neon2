@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Container, Image } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import cover from "../images/mgkCover.jpg";
 
 export default function Detail() {
   const accessToken =
@@ -32,6 +34,17 @@ export default function Detail() {
             ... on LibraryTrack {
             id
             title
+            audioAnalysisV6 {
+          __typename
+          ... on AudioAnalysisV6Finished {
+            result {
+              predominantVoiceGender
+              musicalEraTag
+              genreTags
+              moodTags
+            }
+          }
+        }
             }
             ... on LibraryTrackNotFoundError {
             message
@@ -74,9 +87,15 @@ export default function Detail() {
 
   return (
     <div>
-      <h1>{song.title}</h1>
-      <h1>{song.artist}</h1>
-      <h1>{song.album}</h1>
+      <div className="topBar">
+        <h1>Song Details</h1>
+      </div>
+      <Container className="pageContent">
+        <Image src={cover} thumbnail />
+        <h1>{song.title}</h1>
+        <h2>{song.artist}</h2>
+        <h1>{song.album}</h1>
+      </Container>
     </div>
   );
 }

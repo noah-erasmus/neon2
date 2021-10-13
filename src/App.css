@@ -1,7 +1,13 @@
 .topBar {
   background-color: #ef0078;
   height: 80px;
-  position: relative;
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
+
+.navbar {
+  background-color: #ef0078;
 }
 
 .topBar h1 {
@@ -42,6 +48,10 @@
   text-decoration: none;
 }*/
 
+.pageContent {
+  margin-top: 80px;
+}
+
 .libraryItem {
   display: flex;
   flex-direction: column;
@@ -58,4 +68,14 @@
   padding: 0;
   margin: 0;
   font-size: 16px;
+}
+
+.moodBtns {
+  display: flex;
+  flex-direction: column;
+}
+
+.moodBtn {
+  background-color: #ef0078;
+  color: white;
 }

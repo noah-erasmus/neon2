@@ -36,7 +36,7 @@ function Library() {
     var values = {};
     const query = `
         query LibraryTracksQuery {
-        libraryTracks(first: 10) {
+        libraryTracks(first: 30) {
           pageInfo {
             hasNextPage
           }
@@ -70,7 +70,7 @@ function Library() {
 
   useEffect(() => {
     fetchData();
-    console.log(resp.data.libraryTracks.edges);
+    console.log(resp);
   }, []);
 
   useEffect(() => {
@@ -105,7 +105,7 @@ function Library() {
       <div className="topBar">
         <h1>Libary</h1>
       </div>
-      <Container>
+      <Container className="pageContent">
         {songs.map((item) => {
           return (
             <Row>

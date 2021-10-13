@@ -5,7 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 export default function Navigation() {
   return (
     <>
-      <Navbar fixed="bottom" bg="dark" variant="dark">
+      <Navbar fixed="bottom" className="navbar" variant="dark">
         <Container>
           <Navbar.Brand href="/">neon</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

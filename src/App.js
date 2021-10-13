@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import { Route, Switch } from "react-router";
 import Navigation from "./components/Navigation";
 import Detail from "./pages/Detail";
+import MoodSuggestions from "./pages/MoodSuggestions";
 
 const secret = "99178b9a83393be0ca9eaa1eb00b5f4ffedb8";
 
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route path="/detail/:id">
           <Detail />
+        </Route>
+        <Route path="/moodSuggestions/:mood">
+          <MoodSuggestions />
         </Route>
         <Route path="/">
           <Home />
