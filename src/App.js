@@ -18,7 +18,11 @@ function App() {
   const [navState, setNavState] = useState("Home");
 
   return (
-    <>
+    <div
+      style={{
+        backgroundColor: "#121212",
+      }}
+    >
       <Switch>
         <Route path="/library">
           {/* {resp.resp.data.libraryTracks.pageInfo.hasNextPage !== false ? (
@@ -49,7 +53,7 @@ function App() {
       {/* navState === "Home" ? <Home /> : navState === "Library" ? <Library /> :
       navState === "Analytics" ? <Analytics /> : navState === "Moods" ?
       <Moods /> : navState === "Settings" ? <Settings /> : */}
-    </>
+    </div>
   );
 }
 

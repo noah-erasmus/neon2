@@ -110,7 +110,7 @@ function Library() {
           return (
             <Row>
               <Col
-                xs={2}
+                xs={3}
                 style={{
                   padding: 0,
                   display: "flex",
@@ -120,10 +120,11 @@ function Library() {
                   className="libraryItemDetail"
                   src={cover}
                   alt=""
-                  width="60"
-                  height="60"
+                  width="70"
+                  height="70"
                   style={{
                     margin: "auto",
+                    padding: 5,
                   }}
                 />
               </Col>
@@ -135,8 +136,20 @@ function Library() {
                 }}
               >
                 <div className="libraryItem">
-                  <h3>{item.title}</h3>
-                  <h4>{item.artist}</h4>
+                  <h3
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    {item.title}
+                  </h3>
+                  <h4
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    {item.artist}
+                  </h4>
                 </div>
               </Col>
               <Col xs={1}>
