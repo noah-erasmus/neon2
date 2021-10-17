@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Container, Image } from "react-bootstrap";
+import { Container, Image, Row, Stack } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import { useParams } from "react-router-dom";
+import { PuffLoader } from "react-spinners";
+import SongCard from "../components/SongCard";
 import cover from "../images/mgkCover.jpg";
 
 export default function Detail() {
   const accessToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSW50ZWdyYXRpb25BY2Nlc3NUb2tlbiIsInZlcnNpb24iOiIxLjAiLCJpbnRlZ3JhdGlvbklkIjoxODEsInVzZXJJZCI6NDQwMCwiYWNjZXNzVG9rZW5TZWNyZXQiOiJmNzJkNGUzMTY5YjE4MjMwZmQxMmI5ZTQ4MjVjYmU5ZjRlMmVmMjkzMzhhZmFkYTUxOGEwYTY1NGM2ZjVkODllIiwiaWF0IjoxNjMyODM3MzY3fQ.wKBR9bEeQpJ8r-Lvh_RscYXKbamALc5ViluHcQg3-4c";
   const { id } = useParams();
+  const [loading, setLoading] = useState(true);
   const [resp, setResp] = useState({
     data: {
       libraryTrack: {
@@ -106,8 +110,10 @@ export default function Detail() {
   console.log(id);
   const [similar, setSimilar] = useState([
     {
-      id: 234235,
-      title: "Loading_Loading_Loading",
+      id: 234234,
+      title: "Loading",
+      artist: "Loading",
+      album: "Loading",
     },
   ]);
   const [song, setSong] = useState({
@@ -117,91 +123,58 @@ export default function Detail() {
     id: id.slice(1),
   });
 
-  // const fetchSimilar = async () => {
-  //   const query = `
-  //       query SimilarTracksQuery {
-  //       libraryTrack(id: ${parseInt(id.slice(1))}) {
-  //         __typename
-  //         ... on Error {
-  //           message
-  //         }
-  //         ... on LibraryTrack {
-  //           id
-  //           similarLibraryTracks(first:10) {
-  //             __typename
-  //             ... on SimilarLibraryTracksError {
-  //               code
-  //               message
-  //             }
-  //             ... on SimilarLibraryTrackConnection {
-  //               edges {
-  //                 node {
-  //                   libraryTrack {
-  //                     id
-  //                     title
-  //                   }
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `;
-  // }
-
   const fetchData = async () => {
     console.log(id);
     const query = `
         query SimilarTracksQuery {
-  libraryTrack(id: 5387871) {
-    __typename
-    ... on Error {
-      message
-    }
-    ... on LibraryTrack {
-      id
-      similarLibraryTracks(first:10) {
-        __typename
-        ... on SimilarLibraryTracksError {
-          code
-          message
-        }
-        ... on SimilarLibraryTrackConnection {
-          edges {
-            node {
-              libraryTrack {
-                id
-                title
+          libraryTrack(id: 5387871) {
+            __typename
+            ... on Error {
+              message
+            }
+            ... on LibraryTrack {
+              id
+              similarLibraryTracks(first:10) {
+                __typename
+                ... on SimilarLibraryTracksError {
+                  code
+                  message
+                }
+                ... on SimilarLibraryTrackConnection {
+                  edges {
+                    node {
+                      libraryTrack {
+                        id
+                        title
+                      }
+                    }
+                  }
+                }
               }
             }
           }
+          libraryTrack(id:5387871) {
+                    __typename
+                    ... on LibraryTrack {
+                    id
+                    title
+                    audioAnalysisV6 {
+                  __typename
+                  ... on AudioAnalysisV6Finished {
+                    result {
+                      predominantVoiceGender
+                      musicalEraTag
+                      genreTags
+                      moodTags
+                    }
+                  }
+                }
+                    }
+                    ... on LibraryTrackNotFoundError {
+                    message
+                    }
+                }
         }
-      }
-    }
-  }
-  libraryTrack(id:5387871) {
-            __typename
-            ... on LibraryTrack {
-            id
-            title
-            audioAnalysisV6 {
-          __typename
-          ... on AudioAnalysisV6Finished {
-            result {
-              predominantVoiceGender
-              musicalEraTag
-              genreTags
-              moodTags
-            }
-          }
-        }
-            }
-            ... on LibraryTrackNotFoundError {
-            message
-            }
-        }
-}
     `;
 
     await fetch("https://api.cyanite.ai/graphql", {
@@ -215,51 +188,11 @@ export default function Detail() {
       },
     })
       .then((res) => res.json())
-      .then((data) => setResp(data));
+      .then((data) => {
+        setResp(data);
+        setLoading(false);
+      });
   };
-
-  // const fetchData = async () => {
-  //   var values = {};
-  //   console.log(id);
-  //   const query = `
-  //       query LibraryTrackQuery {
-  //       libraryTrack(id:${parseInt(id.slice(1))}) {
-  //           __typename
-  //           ... on LibraryTrack {
-  //           id
-  //           title
-  //           audioAnalysisV6 {
-  //         __typename
-  //         ... on AudioAnalysisV6Finished {
-  //           result {
-  //             predominantVoiceGender
-  //             musicalEraTag
-  //             genreTags
-  //             moodTags
-  //           }
-  //         }
-  //       }
-  //           }
-  //           ... on LibraryTrackNotFoundError {
-  //           message
-  //           }
-  //       }
-  //       }
-  //   `;
-
-  //   await fetch("https://api.cyanite.ai/graphql", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       query: query,
-  //     }),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + accessToken,
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => setResp(data));
-  // };
 
   useEffect(() => {
     fetchData();
@@ -269,13 +202,30 @@ export default function Detail() {
   useEffect(() => {
     console.log(resp);
     const similarSongs = [];
-    console.log(resp.data.libraryTrack.similarLibraryTracks.edges);
     for (
       var i = 0;
       i < resp.data.libraryTrack.similarLibraryTracks.edges.length;
       i++
     ) {
-      similarSongs.push(resp.data.libraryTrack.similarLibraryTracks.edges[i]);
+      similarSongs.push({
+        id: resp.data.libraryTrack.similarLibraryTracks.edges[i].node
+          .libraryTrack.id,
+        title: resp.data.libraryTrack.similarLibraryTracks.edges[
+          i
+        ].node.libraryTrack.title
+          .split("_")[0]
+          .replace(/-/g, " "),
+        artist: resp.data.libraryTrack.similarLibraryTracks.edges[
+          i
+        ].node.libraryTrack.title
+          .split("_")[1]
+          .replace(/-/g, " "),
+        album: resp.data.libraryTrack.similarLibraryTracks.edges[
+          i
+        ].node.libraryTrack.title
+          .split("_")[2]
+          .replace(/-/g, " "),
+      });
     }
     setSong({
       title: resp.data.libraryTrack.title.split("_")[0].replace(/-/g, " "),
@@ -290,43 +240,64 @@ export default function Detail() {
     console.log(similar);
   }, [resp]);
 
+  const songList = similar.map((song) => (
+    <SongCard key={song.id} title={song.title} artist={song.artist} />
+  ));
+
   return (
     <div style={{ height: "100vh" }}>
       <div className="topBar">
         <h1>Song Details</h1>
       </div>
-      <Container className="pageContent" style={{ paddingTop: 10 }}>
-        <Image src={cover} thumbnail />
-        <Container style={{ marginLeft: 0 }}>
-          <h1
-            style={{
-              color: "white",
-              marginTop: 10,
-              marginBottom: 0,
-            }}
-          >
-            {song.title}
-          </h1>
-          <h2
-            style={{
-              color: "white",
-              fontSize: 16,
-            }}
-          >
-            {song.artist}
-          </h2>
-          <h3
-            style={{
-              color: "white",
-              fontSize: 14,
-            }}
-          >
-            Similar Songs:
-            {similar.map((item) => {
-              return <p>{item.node.libraryTrack.title}</p>;
-            })}
-          </h3>
-        </Container>
+      <Container className="pageContent" style={{ paddingTop: 110 }}>
+        {loading ? (
+          <div className="detailsLoader">
+            <PuffLoader color="#ef0078" loading={loading} size={150} />
+          </div>
+        ) : (
+          <>
+            <Image src={cover} thumbnail />
+            <Container style={{ marginLeft: 0 }}>
+              <h1
+                style={{
+                  color: "white",
+                  marginTop: 10,
+                  marginBottom: 0,
+                }}
+              >
+                {song.title}
+              </h1>
+              <h2
+                style={{
+                  color: "white",
+                  fontSize: 16,
+                }}
+              >
+                {song.artist}
+              </h2>
+              <h3
+                style={{
+                  color: "white",
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  marginTop: "20px",
+                }}
+              >
+                Similar Songs:
+              </h3>
+              <Stack direction="horizontal" gap={3} className="suggestionGrid">
+                {songList}
+
+                {/* {similar.map((song) => (
+                  <div>
+                    <SongCard title={song.title} />{" "}
+                  </div>
+                  <div>{song.title}</div>
+                ))} */}
+              </Stack>
+            </Container>
+          </>
+        )}
         {/* <h1
           style={{
             color: "white",

@@ -1,6 +1,6 @@
 .topBar {
   background-color: #ef0078;
-  height: 80px;
+  height: 100px;
   width: 100%;
   position: fixed;
   top: 0;
@@ -14,6 +14,7 @@
   color: white;
   position: absolute;
   bottom: 0;
+  margin-left: 15px;
 }
 
 /* .page {
@@ -49,7 +50,7 @@
 }*/
 
 .pageContent {
-  margin-top: 80px;
+  padding-top: 105px;
 }
 
 .libraryItem {
@@ -78,4 +79,61 @@
 .moodBtn {
   background-color: #ef0078;
   color: white;
+}
+
+.loaderContainer {
+  background-color: #121212;
+  height: 100vh;
+}
+
+.loader {
+  padding-top: 75%;
+  padding-left: 25%;
+}
+
+.detailsLoader {
+  padding-top: 60%;
+  padding-left: 25%;
+}
+
+.suggestionGrid {
+  /* display: grid;
+  grid-template-columns: auto auto auto; */
+  width: 100%;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.songCard {
+  display: flex;
+  flex-direction: column;
+  background-color: #282828;
+  width: 100px;
+  height: 145px;
+}
+
+.songCard img {
+  width: 100px;
+  height: 100px;
+}
+
+.songCard h3 {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  width: 90px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.songCard h4 {
+  font-size: 12px;
+  color: white;
+  width: 90px;
+  height: 15px;
+  margin-left: 5px;
+  overflow: hidden;
 }

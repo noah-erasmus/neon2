@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import cover from "../images/mgkCover.jpg";
+import { PuffLoader } from "react-spinners";
 
 function Library() {
   const accessToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSW50ZWdyYXRpb25BY2Nlc3NUb2tlbiIsInZlcnNpb24iOiIxLjAiLCJpbnRlZ3JhdGlvbklkIjoxODEsInVzZXJJZCI6NDQwMCwiYWNjZXNzVG9rZW5TZWNyZXQiOiJmNzJkNGUzMTY5YjE4MjMwZmQxMmI5ZTQ4MjVjYmU5ZjRlMmVmMjkzMzhhZmFkYTUxOGEwYTY1NGM2ZjVkODllIiwiaWF0IjoxNjMyODM3MzY3fQ.wKBR9bEeQpJ8r-Lvh_RscYXKbamALc5ViluHcQg3-4c";
   const [songs, setSongs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [resp, setResp] = useState({
     data: {
       libraryTracks: {
@@ -65,7 +67,10 @@ function Library() {
       },
     })
       .then((res) => res.json())
-      .then((data) => setResp(data));
+      .then((data) => {
+        setResp(data);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -106,60 +111,65 @@ function Library() {
         <h1>Libary</h1>
       </div>
       <Container className="pageContent">
-        {songs.map((item) => {
-          return (
-            <Row>
-              <Col
-                xs={3}
-                style={{
-                  padding: 0,
-                  display: "flex",
-                }}
-              >
-                <img
-                  className="libraryItemDetail"
-                  src={cover}
-                  alt=""
-                  width="70"
-                  height="70"
-                  style={{
-                    margin: "auto",
-                    padding: 5,
-                  }}
-                />
-              </Col>
-              <Col
-                xs={7}
-                style={{
-                  padding: 0,
-                  display: "flex",
-                }}
-              >
-                <div className="libraryItem">
-                  <h3
+        {loading ? (
+          <Container className="loaderContainer">
+            <div className="loader">
+              <PuffLoader color="#ef0078" loading={loading} size={150} />
+            </div>
+          </Container>
+        ) : (
+          songs.map((item) => {
+            return (
+              <LinkContainer to={`/detail/:${item.id}`}>
+                <Row>
+                  <Col
+                    xs={3}
                     style={{
-                      color: "white",
+                      padding: 0,
+                      display: "flex",
                     }}
                   >
-                    {item.title}
-                  </h3>
-                  <h4
+                    <img
+                      className="libraryItemDetail"
+                      src={cover}
+                      alt=""
+                      width="70"
+                      height="70"
+                      style={{
+                        margin: "auto",
+                        padding: 5,
+                      }}
+                    />
+                  </Col>
+                  <Col
+                    xs={7}
                     style={{
-                      color: "white",
+                      padding: 0,
+                      display: "flex",
                     }}
                   >
-                    {item.artist}
-                  </h4>
-                </div>
-              </Col>
-              <Col xs={1}>
-                <LinkContainer to={`/detail/:${item.id}`}>
-                  <Button variant="danger">More</Button>
-                </LinkContainer>
-              </Col>
-            </Row>
-          );
-        })}
+                    <div className="libraryItem">
+                      <h3
+                        style={{
+                          color: "white",
+                        }}
+                      >
+                        {item.title}
+                      </h3>
+                      <h4
+                        style={{
+                          color: "white",
+                        }}
+                      >
+                        {item.artist}
+                      </h4>
+                    </div>
+                  </Col>
+                </Row>
+              </LinkContainer>
+            );
+          })
+        )}
       </Container>
       {/* <h2>{props.resp.data.libraryTracks.edges[0].node.id}</h2> */}
     </div>
