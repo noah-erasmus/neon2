@@ -8,6 +8,7 @@ import Chart from "chart.js/auto";
 import { songsInfo } from "../data.js";
 import { BsPlayFill } from "react-icons/bs";
 import { LinkContainer } from "react-router-bootstrap";
+import AudioPlayer from "../components/AudioPlayer";
 
 const chartConfig = {
   type: "radar",
@@ -426,6 +427,7 @@ export default function Detail() {
             </Container>
           </>
         )}
+        <AudioPlayer tracks={songsInfo} />
       </Container>
     </div>
   );
