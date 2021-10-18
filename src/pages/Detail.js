@@ -1,79 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Image, Row, Stack } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { Col, Container, Image, Row, Stack } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { PuffLoader } from "react-spinners";
 import SongCard from "../components/SongCard";
 import cover from "../images/mgkCover.jpg";
 import Chart from "chart.js/auto";
-
-// const radarData = {
-// labels: [
-//   "Energetic",
-//   "Uplifting",
-//   "Happy",
-//   "Chill",
-//   "Calm",
-//   "Sad",
-//   "Dark",
-//   "Aggressive",
-// ],
-//   datasets: [
-//     {
-//       label: "Mood",
-//       data: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-//       fill: true,
-//       backgroundColor: "rgba(54, 162, 235, 0.2)",
-//       borderColor: "rgb(54, 162, 235)",
-//       pointBackgroundColor: "rgb(54, 162, 235)",
-//       pointBorderColor: "#fff",
-//     },
-//   ],
-// };
-
-// const chartConfig = {
-//   type: "radar",
-//   data: radarData,
-//   options: {
-//     elements: {
-//       line: {
-//         borderWidth: 3,
-//       },
-//     },
-//   },
-// };
-
-// const MoodRadar = ({ moodData }) => {
-//   const chartContainer = useRef(null);
-//   const [chartInstance, setChartInstance] = useState(null);
-
-//   useEffect(() => {
-//     if (chartContainer && chartContainer.current) {
-//       const newChartInstance = new Chart(chartContainer.current, chartConfig);
-//       setChartInstance(newChartInstance);
-//     }
-//   }, [chartContainer]);
-
-//   const updateDataset = (datasetIndex, newData) => {
-//     chartInstance.data.datasets[datasetIndex] = newData;
-//     chartInstance.update();
-//     console.log("updated");
-//   };
-
-//   useEffect(() => {
-//     if (chartInstance) {
-//       updateDataset(0, moodData);
-//     }
-//   }, [moodData, chartInstance]);
-
-//   return (
-//     <div>
-//       <canvas ref={chartContainer} height="300" width="300" />
-//     </div>
-//   );
-// };
-
-const randomInt = () => Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+import { songsInfo } from "../data.js";
+import { BsPlayFill } from "react-icons/bs";
+import { LinkContainer } from "react-router-bootstrap";
 
 const chartConfig = {
   type: "radar",
@@ -93,6 +27,7 @@ const chartConfig = {
         label: "",
         data: [12, 19, 3, 5, 2, 3, 8, 5],
         fill: true,
+        backgroundColor: "rgba(239, 0, 120, 0.5)",
         borderColor: "rgba(239, 0, 120, 1)",
         pointBackgroundColor: "rgb(255, 99, 132)",
         pointBorderColor: "rgba(239, 0, 120, 1)",
@@ -126,7 +61,7 @@ const chartConfig = {
           maxTicksLimit: 6,
         },
         grid: {
-          color: "white",
+          color: "rgba(255,255,255,0.5",
         },
         pointLabels: {
           color: "white",
@@ -160,13 +95,6 @@ const RadarChart = ({ moodData }) => {
     if (chartInstance) updateDataset(0, moodData);
   }, 500);
 
-  // useEffect(() => {
-  //   if (moodData !== [12, 19, 3, 5, 2, 3, 8, 5] && chartInstance !== null) {
-  //     updateDataset(0, moodData);
-  //     console.log("updated dataset");
-  //   }
-  // }, [moodData]);
-
   return (
     <div>
       <canvas ref={chartContainer} />
@@ -179,6 +107,8 @@ export default function Detail() {
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSW50ZWdyYXRpb25BY2Nlc3NUb2tlbiIsInZlcnNpb24iOiIxLjAiLCJpbnRlZ3JhdGlvbklkIjoxODEsInVzZXJJZCI6NDQwMCwiYWNjZXNzVG9rZW5TZWNyZXQiOiJmNzJkNGUzMTY5YjE4MjMwZmQxMmI5ZTQ4MjVjYmU5ZjRlMmVmMjkzMzhhZmFkYTUxOGEwYTY1NGM2ZjVkODllIiwiaWF0IjoxNjMyODM3MzY3fQ.wKBR9bEeQpJ8r-Lvh_RscYXKbamALc5ViluHcQg3-4c";
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
+  const [coverArt, setCoverArt] = useState("/images/mgkCover.jpg");
+  const [spotify, setSpotify] = useState("");
   const [moodData, setMoodData] = useState([12, 19, 3, 5, 2, 3, 8, 5]);
   const [graph, setGraph] = useState(false);
   const [resp, setResp] = useState({
@@ -337,26 +267,26 @@ export default function Detail() {
       .then((res) => res.json())
       .then((data) => {
         setResp(data);
-        console.log(data.data.libraryTrack.audioAnalysisV6.result.mood);
-        // setMoodData([
-        //   data.data.libraryTrack.audioAnalysisV6.result.mood.energetic,
-        //   data.data.libraryTrack.audioAnalysisV6.result.mood.uplifting,
-        //   data.data.libraryTrack.audioAnalysisV6.result.mood.happy,
-        //   data.data.libraryTrack.audioAnalysisV6.result.mood.chilled,
-        //   data.data.libraryTrack.audioAnalysisV6.result.mood.calm,
-        //   data.data.libraryTrack.audioAnalysisV6.result.mood.sad,
-        //   data.data.libraryTrack.audioAnalysisV6.result.mood.dark,
-        //   data.data.libraryTrack.audioAnalysisV6.result.mood.aggressive,
-        // ]);
         prepRadar(data.data.libraryTrack.audioAnalysisV6.result.mood);
-        console.log(resp);
-        console.log(moodData);
+
         setLoading(false);
       });
   };
 
   useEffect(() => {
+    console.log(parseInt(id.slice(1)));
     fetchData(id.slice(1));
+    const cover = songsInfo.find(
+      (x) => x.id === parseInt(id.slice(1))
+    ).coverArt;
+    console.log(cover);
+    const spotifyUrl = songsInfo.find(
+      (x) => x.id === parseInt(id.slice(1))
+    ).spotifyLink;
+    setSpotify(spotifyUrl);
+    setCoverArt(cover);
+    console.log(coverArt);
+    console.log(spotify);
   }, []);
 
   const prepRadar = (resp) => {
@@ -390,11 +320,6 @@ export default function Detail() {
   useEffect(() => {
     console.log(moodData);
   }, [moodData]);
-
-  // useEffect(() => {
-  //   prepRadar(resp);
-  //   console.log(moodData);
-  // }, [resp]);
 
   useEffect(() => {
     const similarSongs = [];
@@ -452,25 +377,36 @@ export default function Detail() {
           </div>
         ) : (
           <>
-            <Image src={cover} thumbnail />
+            <Image thumbnail src={coverArt} />
             <Container style={{ marginLeft: 0 }}>
-              <h1
-                style={{
-                  color: "white",
-                  marginTop: 10,
-                  marginBottom: 0,
-                }}
-              >
-                {song.title}
-              </h1>
-              <h2
-                style={{
-                  color: "white",
-                  fontSize: 16,
-                }}
-              >
-                {song.artist}
-              </h2>
+              <Row>
+                <Col xs={9}>
+                  <h1
+                    style={{
+                      color: "white",
+                      marginTop: 10,
+                      marginBottom: 0,
+                    }}
+                  >
+                    {song.title}
+                  </h1>
+                  <h2
+                    style={{
+                      color: "white",
+                      fontSize: 16,
+                    }}
+                  >
+                    {song.artist}
+                  </h2>
+                </Col>
+                <Col>
+                  <a href={spotify} style={{ textDecoration: "none" }}>
+                    <div className="playBtn">
+                      <BsPlayFill size={30} />
+                    </div>
+                  </a>
+                </Col>
+              </Row>
               <Container className="moodRadar">
                 {graph ? <RadarChart moodData={moodData} /> : null}
               </Container>
@@ -486,24 +422,10 @@ export default function Detail() {
               </h3>
               <Stack direction="horizontal" gap={3} className="suggestionGrid">
                 {songList}
-
-                {/* {similar.map((song) => (
-                  <div>
-                    <SongCard title={song.title} />{" "}
-                  </div>
-                  <div>{song.title}</div>
-                ))} */}
               </Stack>
             </Container>
           </>
         )}
-        {/* <h1
-          style={{
-            color: "white",
-          }}
-        >
-          {song.album}
-        </h1> */}
       </Container>
     </div>
   );
