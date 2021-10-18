@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Col, Container, Image, Row, Stack } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { PuffLoader } from "react-spinners";
 import SongCard from "../components/SongCard";
 import cover from "../images/mgkCover.jpg";
@@ -110,6 +110,9 @@ export default function Detail() {
   const [loading, setLoading] = useState(true);
   const [coverArt, setCoverArt] = useState("/images/mgkCover.jpg");
   const [spotify, setSpotify] = useState("");
+  const [player, setPlayer] = useState(
+    songsInfo.find((x) => x.id === parseInt(id.slice(1)))
+  );
   const [moodData, setMoodData] = useState([12, 19, 3, 5, 2, 3, 8, 5]);
   const [graph, setGraph] = useState(false);
   const [resp, setResp] = useState({
@@ -118,6 +121,8 @@ export default function Detail() {
         __typename: "LibraryTrack",
         audioAnalysisV6: {
           result: {
+            genreTags: ["rapHipHop", "pop"],
+            bpm: 100,
             mood: {
               aggressive: 0.27846482396125793,
               calm: 0.07282793521881104,
@@ -185,6 +190,9 @@ export default function Detail() {
     artist: "Loading",
     album: "Loading",
     id: id.slice(1),
+    genre1: "Loading",
+    genre2: "Loading",
+    bpm: 100,
   });
 
   const fetchData = async (id) => {
@@ -227,6 +235,7 @@ export default function Detail() {
                     result {
                       predominantVoiceGender
                       musicalEraTag
+                      bpm
                       genreTags
                       mood {
                         aggressive
@@ -275,19 +284,15 @@ export default function Detail() {
   };
 
   useEffect(() => {
-    console.log(parseInt(id.slice(1)));
     fetchData(id.slice(1));
     const cover = songsInfo.find(
       (x) => x.id === parseInt(id.slice(1))
     ).coverArt;
-    console.log(cover);
     const spotifyUrl = songsInfo.find(
       (x) => x.id === parseInt(id.slice(1))
     ).spotifyLink;
     setSpotify(spotifyUrl);
     setCoverArt(cover);
-    console.log(coverArt);
-    console.log(spotify);
   }, []);
 
   const prepRadar = (resp) => {
@@ -317,10 +322,6 @@ export default function Detail() {
     console.log(moodData);
     setGraph(true);
   };
-
-  useEffect(() => {
-    console.log(moodData);
-  }, [moodData]);
 
   useEffect(() => {
     const similarSongs = [];
@@ -357,13 +358,18 @@ export default function Detail() {
         .replace(/-/g, " ")
         .slice(0, -4),
       id: id.slice(1),
+      genre1: resp.data.libraryTrack.audioAnalysisV6.result.genreTags[0],
+      genre2: resp.data.libraryTrack.audioAnalysisV6.result.genreTags[1],
+      bpm: resp.data.libraryTrack.audioAnalysisV6.result.bpm,
     });
     setSimilar(similarSongs);
     console.log(resp);
   }, [resp]);
 
   const songList = similar.map((song) => (
-    <SongCard key={song.id} title={song.title} artist={song.artist} />
+    <LinkContainer to={`/detail/:${song.id}`}>
+      <SongCard key={song.id} title={song.title} artist={song.artist} />
+    </LinkContainer>
   ));
 
   return (
@@ -381,7 +387,7 @@ export default function Detail() {
             <Image thumbnail src={coverArt} />
             <Container style={{ marginLeft: 0 }}>
               <Row>
-                <Col xs={9}>
+                <Col xs={8}>
                   <h1
                     style={{
                       color: "white",
@@ -401,11 +407,28 @@ export default function Detail() {
                   </h2>
                 </Col>
                 <Col>
-                  <a href={spotify} style={{ textDecoration: "none" }}>
+                  <h3
+                    style={{
+                      color: "white",
+                      marginTop: "20px",
+                      fontSize: 14,
+                    }}
+                  >
+                    {song.genre1}
+                  </h3>
+                  <h3
+                    style={{
+                      color: "white",
+                      fontSize: 12,
+                    }}
+                  >
+                    {"bpm: " + song.bpm.toString()}
+                  </h3>
+                  {/* <a href={spotify} style={{ textDecoration: "none" }}>
                     <div className="playBtn">
                       <BsPlayFill size={30} />
                     </div>
-                  </a>
+                  </a> */}
                 </Col>
               </Row>
               <Container className="moodRadar">
@@ -425,9 +448,11 @@ export default function Detail() {
                 {songList}
               </Stack>
             </Container>
+            <div className="playerHolder">
+              <AudioPlayer tracks={[player]} />
+            </div>
           </>
         )}
-        <AudioPlayer tracks={songsInfo} />
       </Container>
     </div>
   );

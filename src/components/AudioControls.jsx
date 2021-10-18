@@ -14,10 +14,10 @@ const AudioControls = ({
     <button
       type="button"
       className="prev"
-      aria-label="Previous"
-      onClick={onPrevClick}
+      //   aria-label="Previous"
+      //   onClick={onPrevClick}
     >
-      <Prev />
+      {/* <Prev /> */}
     </button>
     {isPlaying ? (
       <button
@@ -41,10 +41,10 @@ const AudioControls = ({
     <button
       type="button"
       className="next"
-      aria-label="Next"
-      onClick={onNextClick}
+      //   aria-label="Next"
+      //   onClick={onNextClick}
     >
-      <Next />
+      {/* <Next /> */}
     </button>
   </div>
 );

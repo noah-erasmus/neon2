@@ -6,7 +6,7 @@ import poly from "./audio/poly.mp3";
 import theMorning from "./audio/theMorning.mp3";
 import theScientist from "./audio/theScientist.mp3";
 import hollyRoller from "./audio/hollyRoller.mp3";
-import rollingIntheDeep from "./audio/rollingIntheDeep.mp3";
+import rollingInTheDeep from "./audio/rollingInTheDeep.mp3";
 import desertWoman from "./audio/desertWoman.mp3";
 import twentTwo from "./audio/22.mp3";
 import ladders from "./audio/ladders.mp3";
@@ -73,8 +73,8 @@ export const songsInfo = [
     id: 5382226,
     spotifyLink:
       "https://open.spotify.com/track/4OSBTYWVwsQhGLF9NHvIbR?si=a8db996a7beb4a07",
-    coverArt: "/images/rollingIntheDeep.jpg",
-    audioSrc: rollingIntheDeep,
+    coverArt: "/images/rollingInTheDeep.jpg",
+    audioSrc: rollingInTheDeep,
   },
   {
     id: 5382156,

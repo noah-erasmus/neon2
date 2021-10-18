@@ -75,6 +75,7 @@
   width: 100%;
   overflow: auto;
   white-space: nowrap;
+  margin-bottom: 90px;
 }
 
 .imageContainer {
