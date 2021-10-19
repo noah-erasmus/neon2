@@ -11,6 +11,8 @@ import { Route, Switch } from "react-router";
 import Navigation from "./components/Navigation";
 import Detail from "./pages/Detail";
 import MoodSuggestions from "./pages/MoodSuggestions";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const secret = "99178b9a83393be0ca9eaa1eb00b5f4ffedb8";
 
@@ -38,6 +40,12 @@ function App() {
         </Route>
         <Route path="/moods">
           <Moods />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
         </Route>
         <Route path="/detail/:id">
           <Detail />
