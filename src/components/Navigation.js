@@ -1,6 +1,9 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { ReactComponent as LibraryIcon } from "../assets/library.svg";
+import { ReactComponent as SettingsIcon } from "../assets/settings.svg";
+import { ReactComponent as MoodIcon } from "../assets/mood.svg";
 
 export default function Navigation() {
   return (
@@ -12,16 +15,24 @@ export default function Navigation() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
               <LinkContainer to="/library">
-                <Nav.Link>Library</Nav.Link>
+                <Nav.Link>
+                  <div>
+                    <LibraryIcon className="navBtn" />
+                  </div>
+                </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/analytics">
+              {/* <LinkContainer to="/analytics">
                 <Nav.Link>Analytics</Nav.Link>
-              </LinkContainer>
+              </LinkContainer> */}
               <LinkContainer to="/moods">
-                <Nav.Link>Moods</Nav.Link>
+                <Nav.Link>
+                  <MoodIcon className="navBtn" />
+                </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/settings">
-                <Nav.Link>Settings</Nav.Link>
+                <Nav.Link>
+                  <SettingsIcon className="navBtn" />
+                </Nav.Link>
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>

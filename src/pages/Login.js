@@ -11,13 +11,7 @@ export default function Login() {
   const auth = getAuth();
   const history = useHistory();
   const signIn = (e) => {
-    e.preventDefault();
-    console.log(emailRef.current.value);
-    signInWithEmailAndPassword(
-      auth,
-      emailRef.current.value,
-      passwordRef.current.value
-    )
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;

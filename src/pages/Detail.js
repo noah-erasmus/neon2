@@ -9,6 +9,8 @@ import { songsInfo } from "../data.js";
 import { BsPlayFill } from "react-icons/bs";
 import { LinkContainer } from "react-router-bootstrap";
 import AudioPlayer from "../components/AudioPlayer";
+import { ReactComponent as HeartEmpty } from "../assets/heart-regular.svg";
+import { ReactComponent as HeartFull } from "../assets/heart-solid.svg";
 
 const chartConfig = {
   type: "radar",
@@ -110,6 +112,7 @@ export default function Detail() {
   const [loading, setLoading] = useState(true);
   const [coverArt, setCoverArt] = useState("/images/mgkCover.jpg");
   const [spotify, setSpotify] = useState("");
+  const [liked, setLiked] = useState(false);
   const [player, setPlayer] = useState(
     songsInfo.find((x) => x.id === parseInt(id.slice(1)))
   );
@@ -387,7 +390,7 @@ export default function Detail() {
             <Image thumbnail src={coverArt} />
             <Container style={{ marginLeft: 0 }}>
               <Row>
-                <Col xs={8}>
+                <Col xs={9}>
                   <h1
                     style={{
                       color: "white",
@@ -407,28 +410,17 @@ export default function Detail() {
                   </h2>
                 </Col>
                 <Col>
-                  <h3
-                    style={{
-                      color: "white",
-                      marginTop: "20px",
-                      fontSize: 14,
-                    }}
-                  >
-                    {song.genre1}
-                  </h3>
-                  <h3
-                    style={{
-                      color: "white",
-                      fontSize: 12,
-                    }}
-                  >
-                    {"bpm: " + song.bpm.toString()}
-                  </h3>
-                  {/* <a href={spotify} style={{ textDecoration: "none" }}>
-                    <div className="playBtn">
-                      <BsPlayFill size={30} />
-                    </div>
-                  </a> */}
+                  <div className="likeBtn">
+                    {liked ? (
+                      <button type="button" onClick={() => setLiked(false)}>
+                        <HeartFull />
+                      </button>
+                    ) : (
+                      <button type="button" onClick={() => setLiked(true)}>
+                        <HeartEmpty />
+                      </button>
+                    )}
+                  </div>
                 </Col>
               </Row>
               <Container className="moodRadar">

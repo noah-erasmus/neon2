@@ -4,6 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import cover from "../images/mgkCover.jpg";
 import { PuffLoader } from "react-spinners";
+import { songsInfo } from "../data.js";
 
 function Library() {
   const accessToken =
@@ -110,7 +111,7 @@ function Library() {
   return (
     <div className="">
       <div className="topBar">
-        <h1>Libary</h1>
+        <h1>Library</h1>
       </div>
       <Container className="pageContent">
         {loading ? (
@@ -133,7 +134,10 @@ function Library() {
                   >
                     <img
                       className="libraryItemDetail"
-                      src={cover}
+                      src={
+                        songsInfo.find((x) => x.id === parseInt(item.id))
+                          .coverArt
+                      }
                       alt=""
                       width="70"
                       height="70"

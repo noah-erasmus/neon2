@@ -66,14 +66,14 @@ export const songsInfo = [
     id: 5387518,
     spotifyLink:
       "https://open.spotify.com/track/1U9qg9EnimTg75HsrNSGwQ?si=4d1315b730e74747",
-    coverArt: "/images/hollyRoller.jpg",
+    coverArt: "/images/holyRoller.jpg",
     audioSrc: hollyRoller,
   },
   {
     id: 5382226,
     spotifyLink:
       "https://open.spotify.com/track/4OSBTYWVwsQhGLF9NHvIbR?si=a8db996a7beb4a07",
-    coverArt: "/images/rollingInTheDeep.jpg",
+    coverArt: "/images/22.jpg",
     audioSrc: rollingInTheDeep,
   },
   {
