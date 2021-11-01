@@ -30,7 +30,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/noah-erasmus/neon2">
-    <img src="readmeAssets/neonLogo.png" alt="Logo" width="80" height="80">
+    <img src="https://raw.githubusercontent.com/noah-erasmus/neon2/master/public/readmeAssets/neonLogo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">neon2</h3>
@@ -76,20 +76,25 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
+<img width="1921" alt="Slide 16_9 - 26" src="https://raw.githubusercontent.com/noah-erasmus/neon2/master/public/readmeAssets/banner.png">
 
 ## About The Project
 
+<<<<<<< HEAD
 [![Product Name Screen Shot][product-screenshot]](https://raw.githubusercontent.com/noah-erasmus/neon2/master/public/readmeAssets/banner.png)
 
 Here's a blank template to get started:
 **To avoid retyping too much info. Do a search and replace with your text editor for the following:**
 `noah-erasmus`, `neon2`, `twitter_handle`, `noah.erasmus@gmail.com`, `neon2`, `Vibrant music. Vibrant life.`
+=======
+This app is for those music fans who want to know everything that there is to know about their favourite albums, and the effects that they have on your mood. If you've ever wondered when an album was released, or what the perfect song would be for the mood you're in, then neon is the app that you needed. Search through an archive filled with your album collection, uploaded to and analyzed by Cyanite.AI, and find extended information on each one with a tap of a button. 
+>>>>>>> d0557dcb0167c4d8f55764dcc3f33a41e12e7fdc
 
 ### Built With
 
-- []()
-- []()
-- []()
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [React.js](https://reactjs.org/)
+- [Cyanite.AI](https://cyanite.ai/)
 
 <!-- GETTING STARTED -->
 
@@ -121,9 +126,6 @@ This is an example of how to list things you need to use the software and how to
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 <!-- ROADMAP -->
 
