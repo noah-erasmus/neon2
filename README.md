@@ -80,15 +80,8 @@
 
 ## About The Project
 
-<<<<<<< HEAD
-[![Product Name Screen Shot][product-screenshot]](https://raw.githubusercontent.com/noah-erasmus/neon2/master/public/readmeAssets/banner.png)
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`noah-erasmus`, `neon2`, `twitter_handle`, `noah.erasmus@gmail.com`, `neon2`, `Vibrant music. Vibrant life.`
-=======
 This app is for those music fans who want to know everything that there is to know about their favourite albums, and the effects that they have on your mood. If you've ever wondered when an album was released, or what the perfect song would be for the mood you're in, then neon is the app that you needed. Search through an archive filled with your album collection, uploaded to and analyzed by Cyanite.AI, and find extended information on each one with a tap of a button. 
->>>>>>> d0557dcb0167c4d8f55764dcc3f33a41e12e7fdc
 
 ### Built With
 
@@ -126,6 +119,9 @@ This is an example of how to list things you need to use the software and how to
 
 ## Usage
 
+<img width="1920" alt="Slide 16_9 - 17" src="https://github.com/noah-erasmus/neon2/raw/master/public/readmeAssets/outcomeLibrary.png">
+<img width="1920" alt="Slide 16_9 - 17" src="https://github.com/noah-erasmus/neon2/raw/master/public/readmeAssets/outcomeDetails.png">
+<img width="1920" alt="Slide 16_9 - 17" src="https://github.com/noah-erasmus/neon2/raw/master/public/readmeAssets/outcomeMoods.png">
 
 <!-- ROADMAP -->
 
@@ -155,7 +151,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - noah.erasmus@gmail.com
+Noah Erasmus - noah.erasmus@gmail.com
 
 Project Link: [https://github.com/noah-erasmus/neon2](https://github.com/noah-erasmus/neon2)
 
@@ -163,9 +159,7 @@ Project Link: [https://github.com/noah-erasmus/neon2](https://github.com/noah-er
 
 ## Acknowledgements
 
-- []()
-- []()
-- []()
+- [Armand Pretorius](https://github.com/ArmandPretorius)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
