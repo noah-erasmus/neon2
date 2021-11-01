@@ -79,7 +79,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/noah-erasmus/neon2/blob/master/public/readmeAssets/banner.png)
+[![Product Name Screen Shot][product-screenshot]](https://raw.githubusercontent.com/noah-erasmus/neon2/master/public/readmeAssets/banner.png)
 
 Here's a blank template to get started:
 **To avoid retyping too much info. Do a search and replace with your text editor for the following:**
