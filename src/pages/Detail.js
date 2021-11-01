@@ -371,16 +371,21 @@ export default function Detail() {
 
   const songList = similar.map((song) => (
     <LinkContainer to={`/detail/:${song.id}`}>
-      <SongCard key={song.id} title={song.title} artist={song.artist} />
+      <SongCard
+        key={song.id}
+        title={song.title}
+        artist={song.artist}
+        cover={song.id}
+      />
     </LinkContainer>
   ));
 
   return (
     <div style={{ height: "100vh" }}>
-      <div className="topBar">
-        <h1>Song Details</h1>
+      <div className="topBarInline">
+        <h1>Song Data</h1>
       </div>
-      <Container className="pageContent" style={{ paddingTop: 110 }}>
+      <Container className="pageContent" style={{ paddingTop: 95 }}>
         {loading ? (
           <div className="detailsLoader">
             <PuffLoader color="#ef0078" loading={loading} size={150} />
@@ -412,7 +417,12 @@ export default function Detail() {
                 <Col>
                   <div className="likeBtn">
                     {liked ? (
-                      <button type="button" onClick={() => setLiked(false)}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setLiked(false);
+                        }}
+                      >
                         <HeartFull />
                       </button>
                     ) : (
@@ -437,7 +447,22 @@ export default function Detail() {
                 Similar Songs:
               </h3>
               <Stack direction="horizontal" gap={3} className="suggestionGrid">
-                {songList}
+                {similar.map((song) => {
+                  console.log(
+                    ".." +
+                      songsInfo.find((x) => x.id === parseInt(song.id)).coverArt
+                  );
+                  return (
+                    <LinkContainer to={`/detail/:${song.id}`}>
+                      <SongCard
+                        key={song.id}
+                        title={song.title}
+                        artist={song.artist}
+                        songId={song.id}
+                      />
+                    </LinkContainer>
+                  );
+                })}
               </Stack>
             </Container>
             <div className="playerHolder">
