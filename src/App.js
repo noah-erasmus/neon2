@@ -13,6 +13,7 @@ import Detail from "./pages/Detail";
 import MoodSuggestions from "./pages/MoodSuggestions";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const secret = "99178b9a83393be0ca9eaa1eb00b5f4ffedb8";
 

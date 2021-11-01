@@ -182,7 +182,7 @@ export default function Detail() {
 
   const [similar, setSimilar] = useState([
     {
-      id: 234234,
+      id: 5382226,
       title: "Loading",
       artist: "Loading",
       album: "Loading",
@@ -369,17 +369,6 @@ export default function Detail() {
     console.log(resp);
   }, [resp]);
 
-  const songList = similar.map((song) => (
-    <LinkContainer to={`/detail/:${song.id}`}>
-      <SongCard
-        key={song.id}
-        title={song.title}
-        artist={song.artist}
-        cover={song.id}
-      />
-    </LinkContainer>
-  ));
-
   return (
     <div style={{ height: "100vh" }}>
       <div className="topBarInline">
@@ -448,10 +437,7 @@ export default function Detail() {
               </h3>
               <Stack direction="horizontal" gap={3} className="suggestionGrid">
                 {similar.map((song) => {
-                  console.log(
-                    ".." +
-                      songsInfo.find((x) => x.id === parseInt(song.id)).coverArt
-                  );
+                  console.log(song.id);
                   return (
                     <LinkContainer to={`/detail/:${song.id}`}>
                       <SongCard

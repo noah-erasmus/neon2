@@ -1,9 +1,11 @@
 import React from "react";
 import { Container, Image } from "react-bootstrap";
 import { songsInfo } from "../data.js";
-import cover from "../images/mgkCover.jpg";
+// import cover from "../images/mgkCover.jpg";
+// import cover from "../images/"
 
 export default function SongCard(title, artist, songId) {
+  console.log(songId);
   console.log(title);
   return (
     <div className="songCard">
