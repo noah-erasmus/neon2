@@ -11,6 +11,9 @@ import desertWoman from "./audio/desertWoman.mp3";
 import twentTwo from "./audio/22.mp3";
 import ladders from "./audio/ladders.mp3";
 import bloodyValentine from "./audio/bloodyValentine.mp3";
+import mountSinai from "./audio/mountSinai.mp3";
+import ctrlAltDelete from "./audio/ctrlAltDelete.mp3";
+import innerbloom from "./audio/innerbloom.mp3";
 
 export const songsInfo = [
   {
@@ -103,5 +106,26 @@ export const songsInfo = [
       "https://open.spotify.com/track/6mADjHs6FXdroPzEGW6KVJ?si=550dbe8e1e4c4f06",
     coverArt: "/images/bloodyValentine.jpg",
     audioSrc: bloodyValentine,
+  },
+  {
+    id: 5598608,
+    spotifyLink:
+      "https://open.spotify.com/track/5vyR3lTiw4zz8B4PvnAO4c?si=d9b57cb4833243bb",
+    coverArt: "/images/mountSinai.jpg",
+    audioSrc: mountSinai,
+  },
+  {
+    id: 5598685,
+    spotifyLink:
+      "https://open.spotify.com/track/1ZNVczQsUBA64aWhvWqaap?si=6309066d17234c87",
+    coverArt: "/images/ctrlAltDelete.jpg",
+    audioSrc: ctrlAltDelete,
+  },
+  {
+    id: 5598762,
+    spotifyLink:
+      "https://open.spotify.com/track/1ZNVczQsUBA64aWhvWqaap?si=6309066d17234c87",
+    coverArt: "/images/innerbloom.jpg",
+    audioSrc: innerbloom,
   },
 ];
